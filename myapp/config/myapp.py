@@ -13,5 +13,17 @@ def get_data():
                     "description": _("List of persons")
                 }
             ]
-        }
+        },
+        {
+            "label": _("Tools"),
+            "icon": "fa fa-wrench",
+            "items": [
+                   {
+                       "type": "page",
+                       "name": "visual",
+                       "label": "Visual",
+                       "description": _("Visualisation")
+                   }
+            ]
+        } 
     ]

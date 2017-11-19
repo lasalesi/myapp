@@ -13,6 +13,8 @@ frappe.pages['visual'].on_page_load = function(wrapper) {
 			frappe.set_route('Form', 'Daily Work Summary Settings');
 		});
 	} */
+	//$(frappe.render_template('visual_template', data)).appendTo(me.body);
+
 }
 
 frappe.visual = {
@@ -23,7 +25,9 @@ frappe.visual = {
 		me.body = $('<div></div>'
 			+ '<h1>Hello World!</h1>').appendTo(me.page.main);
 		var data = "Hello World!";
-		$(frappe.render_template('visual_template', data)).appendTo(me.body);
+		// $(frappe.render_template('visual_template', data)).appendTo(me.body);
+		$(frappe.render_template('visual', data)).appendTo(me.page.main);
+
 		me.more = $('<div class="for-more"><button class="btn btn-sm btn-default btn-more">'
 			+ __("More") + '</button></div>').appendTo(me.page.main)
 			.find('.btn-more').on('click', function() {
