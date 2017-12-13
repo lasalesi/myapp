@@ -23,6 +23,12 @@ def get_data():
                        "name": "visual",
                        "label": "Visual",
                        "description": _("Visualisation")
+                   },
+                   {
+                       "type": "page",
+                       "name": "myimport",
+                       "label": "MyImport",
+                       "description": _("MyImport")
                    }
             ]
         } 
