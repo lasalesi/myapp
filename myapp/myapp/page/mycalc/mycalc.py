@@ -20,3 +20,10 @@ def get_data(start=0):
 
 	#return data
 	return
+
+@frappe.whitelist()
+def insert_log(comment):
+	new_comment = frappe.get_doc({"doctype": "Log"})
+	new_comment.comment = comment
+	new_comment.insert()
+	return new_comment

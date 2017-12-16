@@ -11,6 +11,11 @@ def get_data():
                     "type": "doctype",
                     "name": "Person",
                     "description": _("List of persons")
+                },
+		{
+		    "type": "doctype",
+                    "name": "Log",
+                    "description": _("Log entries")
                 }
             ]
         },

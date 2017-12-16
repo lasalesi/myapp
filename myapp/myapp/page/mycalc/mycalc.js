@@ -41,7 +41,24 @@ frappe.mycalc = {
 				source_volume_uom, destination_volume_uom);
 			$('#destination_volume').val(destination_volume);
 		});
-
+		this.page.main.find(".btn-insert-log").on('click', function() {
+			var me = frappe.mycalc;
+			var comment = $('#comment').val();
+			frappe.call({
+				method: 'myapp.myapp.page.mycalc.mycalc.insert_log',
+				args: {
+					comment: comment
+				},
+				callback: function(r) {
+					if(r.message) {
+						/*this.page.main.find(".insert-log").removeClass("hide");
+						var parent = this.page.main.find(".insert-log-messages").empty();
+						$('<p>Logged!</p>').appendTo(parent);*/
+						window.alert("done");
+					} 
+				}
+			});
+		});
 	},
 	run: function() {
 		var me = frappe.mycalc;
@@ -51,14 +68,14 @@ frappe.mycalc = {
 				start: me.start
 			},
 			callback: function(r) {
-				if(r.message) {
-					r.message.forEach(function(d) {
-						me.add_row(d);
-					});
-				} else {
-					frappe.show_alert({message:__('No more updates'), indicator:'darkgrey'});
-					me.more.parent().addClass('hidden');
-				}
+					if(r.message) {
+						r.message.forEach(function(d) {
+							me.add_row(d);
+						});
+					} else {
+						frappe.show_alert({message:__('No more updates'), indicator:'darkgrey'});
+						me.more.parent().addClass('hidden');
+					}
 			}
 		});
 	},
