@@ -42,6 +42,7 @@
 	  </div>
 	  <div class="form-column col-sm-4">
 	    <button class="btn btn-sm btn-primary btn-insert-log">{{ __("Insert") }}</button>
+	    <a href="/desk#List/Log/List">Show log entries</a>
 	  </div>
 	  <div class="insert-log hide col-sm-4">
 	    <div class="insert-log-messages"></div>
@@ -50,21 +51,19 @@
 	</div>
 
 	<br />
-	<h4>{{ __("Write log entry (form http post)") }}</h4>
+	<h4>{{ __("Parse file") }}</h4>
 	<!-- use three columns -->
 	<div class="section-body">
          <div class="row">
-	  <form action="/desk#mycalc.insert_log_http">
 	   <div class="form-column col-sm-4">
-	    <p>{{ __("Comment") }} <input type="text" id="comment_http" /></p<
+	    <p>{{ __("File") }} <input type="file" id="input_file" /></p<
 	   </div>
 	   <div class="form-column col-sm-4">
-	    <button type="submit" class="btn btn-sm btn-primary btn-insert-log-http">{{ __("Insert") }}</button>
+	    <button type="submit" class="btn btn-sm btn-primary btn-parse-file">{{ __("Parse") }}</button>
 	   </div>
-	   <div class="insert-log-http hide col-sm-4">
-	    <div class="insert-log-messages-http"></div>
+	   <div class="parse-file hide col-sm-4">
+	    <div class="parse-file-messages"></div>
 	   </div>
-	  </form>
 	 </div>
 	</div>
 

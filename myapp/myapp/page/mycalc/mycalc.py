@@ -29,5 +29,5 @@ def insert_log(comment):
 	return new_comment
 
 @frappe.whitelist()
-def insert_log_http():
+def parse_file(file):
 	return
