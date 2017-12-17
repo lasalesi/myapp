@@ -33,7 +33,7 @@
 	</div>
 
 	<br />
-	<h4>{{ __("Write log entry") }}</h4>
+	<h4>{{ __("Write log entry (JavaScript Python call)") }}</h4>
 	<!-- use three columns -->
 	<div class="section-body">
          <div class="row">
@@ -49,7 +49,24 @@
 	 </div>
 	</div>
 
-
+	<br />
+	<h4>{{ __("Write log entry (form http post)") }}</h4>
+	<!-- use three columns -->
+	<div class="section-body">
+         <div class="row">
+	  <form action="/desk#mycalc.insert_log_http">
+	   <div class="form-column col-sm-4">
+	    <p>{{ __("Comment") }} <input type="text" id="comment_http" /></p<
+	   </div>
+	   <div class="form-column col-sm-4">
+	    <button type="submit" class="btn btn-sm btn-primary btn-insert-log-http">{{ __("Insert") }}</button>
+	   </div>
+	   <div class="insert-log-http hide col-sm-4">
+	    <div class="insert-log-messages-http"></div>
+	   </div>
+	  </form>
+	 </div>
+	</div>
 
         <div class="row">
         	<div class="col-md-6">

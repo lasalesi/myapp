@@ -27,3 +27,7 @@ def insert_log(comment):
 	new_comment.comment = comment
 	new_comment.insert()
 	return new_comment
+
+@frappe.whitelist()
+def insert_log_http():
+	return
