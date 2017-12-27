@@ -30,4 +30,6 @@ def insert_log(comment):
 
 @frappe.whitelist()
 def parse_file(file):
+	frappe.throw("Got a file!" + file)
+
 	return

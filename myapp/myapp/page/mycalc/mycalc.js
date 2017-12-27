@@ -61,21 +61,43 @@ frappe.mycalc = {
 		});
 		this.page.main.find(".btn-parse-file").on('click', function() {
 			var me = frappe.mycalc;
-			var file = $('#input_file').val();
-			frappe.call({
-				method: 'myapp.myapp.page.mycalc.mycalc.parse_file',
-				args: {
-					file: file
-				},
-				callback: function(r) {
-					if(r.message) {
-						/*this.page.main.find(".insert-log").removeClass("hide");
-						var parent = this.page.main.find(".insert-log-messages").empty();
-						$('<p>Logged!</p>').appendTo(parent);*/
-						frappe.msgprint("File parsed.");
-					} 
+			// var file = $('#input_file').val();
+			// var file = document.getElementById('input_file').files[0];
+			
+			// read the file 
+			var file = document.getElementById("input_file").files[0];
+			var content = "";
+			window.alert("Has a file");
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function (event) {
+					// document.getElementById("fileContents").innerHTML = event.target.result;
+					content = event.target.result;
+					window.alert("Content: " + content);
+					
+					frappe.call({
+						method: 'myapp.myapp.page.mycalc.mycalc.parse_file',
+						args: {
+							file: content
+						},
+						callback: function(r) {
+							if(r.message) {
+								/*this.page.main.find(".insert-log").removeClass("hide");
+								var parent = this.page.main.find(".insert-log-messages").empty();
+								$('<p>Logged!</p>').appendTo(parent);*/
+								frappe.msgprint("File parsed.");
+							} 
+						}
+					}); 
 				}
-			});
+				reader.onerror = function (event) {
+					document.getElementById("fileContents").innerHTML = "error reading file";
+				}
+				
+				reader.readAsText(file, "UTF-8");
+			}
+			
+
 		});
 	},
 	run: function() {
