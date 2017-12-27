@@ -42,5 +42,18 @@ def get_data():
                        "description": _("MyCalc")
                    }
             ]
+        }, 
+        {
+            "label": _("Banking"),
+            "icon": "fa fa-money",
+            "items": [
+                   {
+                       "type": "page",
+                       "name": "bankimport",
+                       "label": "BankImport",
+                       "description": _("Bank import")
+                   }
+
+            ]
         } 
     ]
