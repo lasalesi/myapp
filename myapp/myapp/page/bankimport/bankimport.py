@@ -16,8 +16,41 @@ def parse(content):
 
 def parse_ubs(content):
     # parse a ubs bank extract csv
-    
-    return
+    # collect all lines of the file
+    lines = content.split("\n")
+    for i in range(1, len(lines)):
+        # skip line 0, it contains the column headers
+        # collect each fields (separated by semicolon)
+        fields = lines[i].split(';')
+        
+        # collect created payment entries
+        new_payment_entries = []
+        
+        # get received amount, only continue if this has a value
+        received_amount = fields[19]
+        if received_amount not "":
+            # get unique transaction ID
+            transaction_id = fields[15]
+            
+            # cross-check if this transaction was already recorded
+            if not frappe.db.exists('Payment Entry', {'reference_no': transaction_id}):
+			    # create new payment entry
+			    new_payment_entry = frappe.get_doc('doctype': 'Payment Entry')
+			    new_payment_entry.naming_series = "PE-"
+			    new_payment_entry.payment_type = "Receive"
+			    # date is in DD.MM.YYYY
+			    date_parts = fields[11].split('.')
+			    date = date_parts[2] + "-" + date_parts[1] + "-" + date_parts[0]
+			    new_payment_entry.posting_date =  date
+			    # new_payment_entry.paid_to 
+			    # new_payment_entry.paid_to_account_currency
+			    new_payment_entry.paid_amount = received_amount
+			    new_payment_entry.reference_no = transaction_id
+			    new_payment_entry.reference_date = date
+			    inserted_payment_entry = new_payment_entry.insert()
+			    new_payment_entries.append(inserted_payment_entry.name)
+            
+	return
     
 @frappe.whitelist()
 def parse_file(content, bank="ubs"):
