@@ -54,7 +54,7 @@ def parse_ubs(content):
                 inserted_payment_entry = new_payment_entry.insert()
                 new_payment_entries.append(inserted_payment_entry.name)
             
-	return new_payment_entries
+    return new_payment_entries
 
 def log(comment):
 	new_comment = frappe.get_doc({"doctype": "Log"})
