@@ -50,7 +50,7 @@ def get_data():
                    {
                        "type": "page",
                        "name": "bankimport",
-                       "label": "BankImport",
+                       "label": "Bank Import",
                        "description": _("Bank import")
                    }
 

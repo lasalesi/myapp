@@ -14,10 +14,17 @@ def parse(content):
             
     return
 
+def parse_ubs(content):
+    # parse a ubs bank extract csv
+    
+    return
+    
 @frappe.whitelist()
-def parse_file(content):
-	# content is the plain text content, parse 
-	frappe.throw("Got a file!" + content)
-
-	return
+def parse_file(content, bank="ubs"):
+    # content is the plain text content, parse 
+    # frappe.throw("Got a file!" + content)
+    if bank == "ubs":
+        parse_ubs(content)
+        
+    return { "message": "Done" }
 

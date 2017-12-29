@@ -1,7 +1,7 @@
 frappe.pages['bankimport'].on_page_load = function(wrapper) {
 	var page = frappe.ui.make_app_page({
 		parent: wrapper,
-		title: __('BankImport'),
+		title: __('Bank Import'),
 		single_column: true
 	});
 
@@ -21,40 +21,47 @@ frappe.bankimport = {
 		// attach button handlers
 		this.page.main.find(".btn-parse-file").on('click', function() {
 			var me = frappe.mycalc;
-			// var file = $('#input_file').val();
-			// var file = document.getElementById('input_file').files[0];
+			
+			// get bank
+			var bank = $('#bank').val();
 			
 			// read the file 
 			var file = document.getElementById("input_file").files[0];
 			var content = "";
-			window.alert("Has a file");
 			if (file) {
+				// create a new reader instance
 				var reader = new FileReader();
+				// assign load event to process the file
 				reader.onload = function (event) {
-					// document.getElementById("fileContents").innerHTML = event.target.result;
+					// read file content
 					content = event.target.result;
-					window.alert("Content: " + content);
 					
+					// call bankimport method with file content
 					frappe.call({
 						method: 'myapp.myapp.page.bankimport.bankimport.parse_file',
 						args: {
-							content: content
+							content: content,
+							bank: bank
 						},
 						callback: function(r) {
-							if(r.message) {
-								/*this.page.main.find(".insert-log").removeClass("hide");
-								var parent = this.page.main.find(".insert-log-messages").empty();
-								$('<p>Logged!</p>').appendTo(parent);*/
-								frappe.msgprint("File parsed.");
+							if (r.message) {
+								var parent = page.main.find(".insert-log-messages").empty();
+								$('<p>Logged!</p>').appendTo(parent);
+								frappe.msgprint(r.message.message);
 							} 
 						}
 					}); 
 				}
+				// assign an error handler event
 				reader.onerror = function (event) {
-					document.getElementById("fileContents").innerHTML = "error reading file";
+					frappe.msgprint(__("Error reading file"), __("Error"));
 				}
 				
 				reader.readAsText(file, "UTF-8");
+			}
+			else
+			{
+				frappe.msgprint(__("Please select a file."), __("Information"));
 			}
 			
 
