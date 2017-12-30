@@ -49,8 +49,13 @@ frappe.bankimport = {
 						callback: function(r) {
 							if (r.message) {
 								var parent = page.main.find(".insert-log-messages").empty();
-								$('<p>Imported!</p>').appendTo(parent);
-								frappe.msgprint(r.message.message);
+								$('<p>' + __(r.message.message) + '</p>').appendTo(parent);
+								frappe.msgprint(__(r.message.message));
+								for (var i = 0; i < r.message.records.length; i++) {
+									$('<p><a href="/desk#Form/Payment Entry/'
+									  + r.message.records[i] + '">' 
+									  + r.message.records[i] + '</a></p>').appendTo(parent);
+								}
 							} 
 						}
 					}); 

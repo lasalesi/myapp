@@ -65,7 +65,7 @@ def parse_ubs(content, account):
                     new_payment_entry.remarks = fields[13] + ", " + fields[14]
                     inserted_payment_entry = new_payment_entry.insert()
                     new_payment_entries.append(inserted_payment_entry.name)
-            
+    
     return new_payment_entries
 
 def log(comment):
@@ -80,8 +80,12 @@ def parse_file(content, bank, account):
     # frappe.throw("Got a file!" + content)
     if bank == "ubs":
         new_records = parse_ubs(content, account)
+    
+    message = "Completed"
+    if len(new_records) == 0:
+        message = "No new transactions found"
         
-    return { "message": "Done", "records": new_records }
+    return { "message": message, "records": new_records }
 
 @frappe.whitelist()
 def get_bank_accounts():
