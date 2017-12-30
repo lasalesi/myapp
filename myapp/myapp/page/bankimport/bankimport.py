@@ -42,6 +42,7 @@ def parse_ubs(content, account):
                 new_payment_entry = frappe.get_doc({'doctype': 'Payment Entry'})
                 new_payment_entry.naming_series = "PE-"
                 new_payment_entry.payment_type = "Receive"
+                new_payment_entry.party_type = "Customer";
                 # date is in DD.MM.YYYY
                 date_parts = fields[11].split('.')
                 date = date_parts[2] + "-" + date_parts[1] + "-" + date_parts[0]
@@ -51,6 +52,7 @@ def parse_ubs(content, account):
                 new_payment_entry.paid_amount = received_amount
                 new_payment_entry.reference_no = transaction_id
                 new_payment_entry.reference_date = date
+                new_payment_entry.remarks = fields[13] + ", " + fields[14]
                 inserted_payment_entry = new_payment_entry.insert()
                 new_payment_entries.append(inserted_payment_entry.name)
             

@@ -78,10 +78,7 @@ frappe.bankimport = {
 			callback: function(r) {
 				if (r.message) {
 					var select = document.getElementById("payment_account");
-					
-					// frappe.msgprint(r.message.accounts);
 					for (var i = 0; i < r.message.accounts.length; i++) {
-						frappe.msgprint(r.message.accounts[i]);
 						var opt = document.createElement("option");
 						opt.value = r.message.accounts[i];
 						opt.innerHTML = r.message.accounts[i];
