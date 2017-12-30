@@ -14,7 +14,7 @@ def parse(content):
             
     return
 
-def parse_ubs(content):
+def parse_ubs(content, account):
     # parse a ubs bank extract csv
     # collect all lines of the file
     log("Starting parser...")
@@ -46,7 +46,7 @@ def parse_ubs(content):
                 date_parts = fields[11].split('.')
                 date = date_parts[2] + "-" + date_parts[1] + "-" + date_parts[0]
                 new_payment_entry.posting_date =  date
-                # new_payment_entry.paid_to 
+                new_payment_entry.paid_to = account
                 # new_payment_entry.paid_to_account_currency
                 new_payment_entry.paid_amount = received_amount
                 new_payment_entry.reference_no = transaction_id
@@ -63,11 +63,20 @@ def log(comment):
 	return new_comment
 	        
 @frappe.whitelist()
-def parse_file(content, bank="ubs"):
+def parse_file(content, bank, account):
     # content is the plain text content, parse 
     # frappe.throw("Got a file!" + content)
     if bank == "ubs":
-        new_records = parse_ubs(content)
+        new_records = parse_ubs(content, account)
         
     return { "message": "Done", "records": new_records }
 
+@frappe.whitelist()
+def get_bank_accounts():
+    accounts = frappe.get_list('Account', filters={'account_type': 'Bank', 'is_group': 0}, fields=['name'])
+    selectable_accounts = []
+    for account in accounts:
+		selectable_accounts.append(account.name)    
+    
+    #frappe.throw(selectable_accounts)
+    return {'accounts': selectable_accounts }

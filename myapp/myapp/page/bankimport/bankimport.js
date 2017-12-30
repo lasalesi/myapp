@@ -6,7 +6,7 @@ frappe.pages['bankimport'].on_page_load = function(wrapper) {
 	});
 
 	frappe.bankimport.make(page);
-	// frappe.bankimport.run();
+	frappe.bankimport.run();
 }
 
 frappe.bankimport = {
@@ -22,8 +22,10 @@ frappe.bankimport = {
 		this.page.main.find(".btn-parse-file").on('click', function() {
 			var me = frappe.mycalc;
 			
-			// get bank
+			// get selected bank
 			var bank = $('#bank').val();
+			// get selected account
+			var account = $('#payment_account').val();
 			
 			// read the file 
 			var file = document.getElementById("input_file").files[0];
@@ -41,12 +43,13 @@ frappe.bankimport = {
 						method: 'myapp.myapp.page.bankimport.bankimport.parse_file',
 						args: {
 							content: content,
-							bank: bank
+							bank: bank,
+							account: account
 						},
 						callback: function(r) {
 							if (r.message) {
 								var parent = page.main.find(".insert-log-messages").empty();
-								$('<p>Logged!</p>').appendTo(parent);
+								$('<p>Imported!</p>').appendTo(parent);
 								frappe.msgprint(r.message.message);
 							} 
 						}
@@ -68,6 +71,24 @@ frappe.bankimport = {
 		});
 	},
 	run: function() {
-		
+		// populate bank accounts
+		frappe.call({
+			method: 'myapp.myapp.page.bankimport.bankimport.get_bank_accounts',
+			args: { },
+			callback: function(r) {
+				if (r.message) {
+					var select = document.getElementById("payment_account");
+					
+					// frappe.msgprint(r.message.accounts);
+					for (var i = 0; i < r.message.accounts.length; i++) {
+						frappe.msgprint(r.message.accounts[i]);
+						var opt = document.createElement("option");
+						opt.value = r.message.accounts[i];
+						opt.innerHTML = r.message.accounts[i];
+						select.appendChild(opt);
+					}
+				} 
+			}
+		}); 
 	}
 }

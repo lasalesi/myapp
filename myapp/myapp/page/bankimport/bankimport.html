@@ -3,8 +3,6 @@
   <h3>{%= __("Bank import") %}</h3>
   <p class="text-muted">{%= __("Import payment entries from bank account file") %}</p>
 
-  <br />
-  <h4>{{ __("Type") }}</h4>
   <div class="section-body">
     <div class="row">
 	  <div class="form-column col-sm-4">
@@ -15,6 +13,13 @@
 		  <option value="zkb">ZKB</option>
 	    </select>
 	  </div>
+	  
+	  <div class="form-column col-sm-4">
+	    <p>{{ __("Payment account") }}</p>
+	    <select id="payment_account">
+
+	    </select>
+	  </div>	  
     </div>
 	    
     <div class="row">
