@@ -19,6 +19,13 @@
 	    <select id="payment_account">
 
 	    </select>
+	  </div>
+	  
+	  <div class="form-column col-sm-4">
+	    <p>{{ __("Options") }}</p>
+	    <div class="checkbox">
+	      <label><input type="checkbox" id="auto_submit">{{ __("Automatically submit.") }}</label>
+	    </div>
 	  </div>	  
     </div>
 	    
@@ -30,6 +37,7 @@
 	  <div class="form-column col-sm-4">
 	    <p>{{ __("Parse") }}</p>
         <button type="submit" class="btn btn-sm btn-primary btn-parse-file">{{ __("Parse") }}</button>
+        <div class="waiting-gif hide"><img src="/assets/frappe/images/ui/ajax-loader.gif" /></div>
 	  </div>
 	  
 	  <div class="form-column col-sm-4">

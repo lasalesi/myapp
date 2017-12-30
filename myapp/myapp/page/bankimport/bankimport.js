@@ -23,9 +23,15 @@ frappe.bankimport = {
 			var me = frappe.bankimport;
 			
 			// get selected bank
-			var bank = $('#bank').val();
+			var bank = document.getElementById("bank").value;
 			// get selected account
-			var account = $('#payment_account').val();
+			var account = document.getElementById("payment_account").value;
+			// get selected option
+			var auto_submit = document.getElementById("auto_submit").checked;
+			/*var auto_submit = 'False';
+			if (auto_submit_bool) {
+				auto_submit = 'True';
+			}*/
 			
 			// read the file 
 			var file = document.getElementById("input_file").files[0];
@@ -35,6 +41,9 @@ frappe.bankimport = {
 				var reader = new FileReader();
 				// assign load event to process the file
 				reader.onload = function (event) {
+					// enable waiting gif
+					page.main.find(".waiting-gif").removeClass("hide");
+					
 					// read file content
 					content = event.target.result;
 					
@@ -44,7 +53,8 @@ frappe.bankimport = {
 						args: {
 							content: content,
 							bank: bank,
-							account: account
+							account: account,
+							auto_submit: auto_submit
 						},
 						callback: function(r) {
 							if (r.message) {
@@ -56,6 +66,8 @@ frappe.bankimport = {
 									  + r.message.records[i] + '">' 
 									  + r.message.records[i] + '</a></p>').appendTo(parent);
 								}
+								// disable waiting gif
+								page.main.find(".waiting-gif").addClass("hide");
 							} 
 						}
 					}); 
