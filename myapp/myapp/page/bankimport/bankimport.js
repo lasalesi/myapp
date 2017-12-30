@@ -20,7 +20,7 @@ frappe.bankimport = {
 
 		// attach button handlers
 		this.page.main.find(".btn-parse-file").on('click', function() {
-			var me = frappe.mycalc;
+			var me = frappe.bankimport;
 			
 			// get selected bank
 			var bank = $('#bank').val();

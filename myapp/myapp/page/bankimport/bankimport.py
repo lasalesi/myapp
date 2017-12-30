@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 import frappe
-from email_reply_parser import EmailReplyParser
-from markdown2 import markdown
+#from email_reply_parser import EmailReplyParser
+#from markdown2 import markdown
 
 def parse(content):
     # this parses the content
@@ -43,13 +43,22 @@ def parse_ubs(content, account):
                 new_payment_entry.naming_series = "PE-"
                 new_payment_entry.payment_type = "Receive"
                 new_payment_entry.party_type = "Customer";
+                # get the customer name
+                customer_name = fields[13]
+                customer = frappe.get_value('Customer', customer_name, 'name')
+                if customer:
+                    new_payment_entry.party = customer
+                else:
+                    new_payment_entry.party = "Guest"
                 # date is in DD.MM.YYYY
                 date_parts = fields[11].split('.')
                 date = date_parts[2] + "-" + date_parts[1] + "-" + date_parts[0]
                 new_payment_entry.posting_date =  date
                 new_payment_entry.paid_to = account
                 # new_payment_entry.paid_to_account_currency
+                new_payment_entry.received_amount = received_amount
                 new_payment_entry.paid_amount = received_amount
+                #new_payment_entry.total_allocated_amount = received_amount
                 new_payment_entry.reference_no = transaction_id
                 new_payment_entry.reference_date = date
                 new_payment_entry.remarks = fields[13] + ", " + fields[14]
