@@ -52,8 +52,13 @@ def get_data():
                        "name": "bankimport",
                        "label": "Bank Import",
                        "description": _("Bank import")
+                   },
+                                      {
+                       "type": "page",
+                       "name": "payment_export",
+                       "label": "Payment export",
+                       "description": _("Payment export")
                    }
-
             ]
         } 
     ]
