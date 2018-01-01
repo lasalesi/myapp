@@ -22,7 +22,33 @@ frappe.payment_export = {
 		this.page.main.find(".btn-create-file").on('click', function() {
 			var me = frappe.payment_export;
 			
-            download("payments.xml", "<xml><payment><iban>123456</iban></payment></xml>");
+            // find selected payments
+            var checkedPayments = findSelected();
+            if (checkedPayments.length > 0) {
+                var payments = [];
+                for (var i = 0; i < checkedPayments.length; i++) {
+                    payments.push(checkedPayments[i].name);
+                }
+                
+                // generate payment file
+                frappe.call({
+                    method: 'myapp.myapp.page.payment_export.payment_export.generate_payment_file',
+                    args: { 
+                        'payments': payments
+                    },
+                    callback: function(r) {
+                        if (r.message) {
+                            // prepare the xml file for download
+                            download("payments.xml", r.message.content);
+                        } 
+                    }
+                });
+                
+            } else {
+                frappe.msgprint( __("Please select at least one payment."), __("Information") );
+            }
+            
+            // 
 
 		});
 	},
@@ -34,7 +60,11 @@ frappe.payment_export = {
 			callback: function(r) {
 				if (r.message) {
 					var parent = page.main.find(".payment-table").empty();
-                    $(frappe.render_template('payment_export_table', r.message)).appendTo(parent);
+                    if (r.message.payments.length > 0) {
+                        $(frappe.render_template('payment_export_table', r.message)).appendTo(parent);
+                    } else {
+                        $('<h3>No payment entries to be paid found with status draft</h3>').appendTo(parent);
+                    }
 				} 
 			}
 		});
@@ -52,4 +82,19 @@ function download(filename, content) {
   element.click();
 
   document.body.removeChild(element);
+}
+
+function findSelected() {
+    var inputs = document.getElementsByTagName("input"); 
+    var checkboxes = []; 
+    var checked = []; 
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].type == "checkbox") {
+        checkboxes.push(inputs[i]);
+        if (inputs[i].checked) {
+          checked.push(inputs[i]);
+        }
+      }
+    }
+    return checked;
 }
