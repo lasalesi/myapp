@@ -34,11 +34,7 @@ frappe.payment_export = {
 			callback: function(r) {
 				if (r.message) {
 					var parent = page.main.find(".payment-table").empty();
-                    $('<table>').appendTo(parent);
-					for (var i = 0; i < r.message.payments.length; i++) {
-						$('<tr><td>' + r.message.payments[i] + '</td></tr>').appendTo(parent);
-					}
-                    $('</table>').appendTo(parent);
+                    $(frappe.render_template('payment_export_table', r.message)).appendTo(parent);
 				} 
 			}
 		});
