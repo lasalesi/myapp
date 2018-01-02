@@ -22,12 +22,16 @@ def generate_payment_file(payments):
     # create group header
     content += "      <GrpHdr>\n"
     # message ID
-    content += "        <MsgId>MSG" + </MsgId>\n"
-    content += "        <CreDtTm>{{ date_time 2010-02-15T07:30:00 }}</CreDtTm>\n"
-    content += "        <NbOfTxs>{{ number_of_transactions 3 }}</NbOfTxs>\n"
-    content += "        <CtrlSum>{{ total_amount 15850.00 }}</CtrlSum>\n"
+    content += "        <MsgId>MSG-" + time.strftime("%Y%m%d%H%M%S") + "</MsgId>\n"
+    # creation date and time ( e.g. 2010-02-15T07:30:00 )
+    content += "        <CreDtTm>" + time.strftime("%Y-%m-%dT%H:%M:%S") + "</CreDtTm>\n"
+    # number of transactions
+    content += "        <NbOfTxs>" + len(payments) + "</NbOfTxs>\n"
+    # total amount of all transactions ( e.g. 15850.00 )   
+    content += "        <CtrlSum>" + get_total_amount(payments) + "</CtrlSum>\n"
     content += "        <InitgPty>\n"
-    content += "          <Nm>MUSTER AG</Nm>\n"
+    # company name ( e.g. MUSTER AG )
+    content += "          <Nm>" + get_company_name(payments[0]) + "</Nm>\n"
     content += "        </InitgPty>\n"
     content += "      </GrpHdr>\n"
 
@@ -89,3 +93,16 @@ def generate_payment_file(payments):
     content += "</Document>\n"
     
     return { 'content': content }
+
+def get_total_amount(payments):
+    # get total amount from all payments
+    total_amount = float(0)
+    for payment in payments:
+        payment_amount = frappe.get_value('Payment Entry', payment, 'paid_amount')
+        total_amount += payment_amount
+        
+    return total_amount
+
+def get_company_name(payment_entry):
+    return frappe.get_value('Payment Entry', payment_entry, 'company')
+    
