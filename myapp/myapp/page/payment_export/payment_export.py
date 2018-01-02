@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import frappe
 #from email_reply_parser import EmailReplyParser
 #from markdown2 import markdown
+import time
 
 @frappe.whitelist()
 def get_payments():
@@ -20,7 +21,8 @@ def generate_payment_file(payments):
     content += "  <CstmrCdtTrfInitn>\n"
     # create group header
     content += "      <GrpHdr>\n"
-    content += "        <MsgId>{{ message_id MSG-01 }}</MsgId>\n"
+    # message ID
+    content += "        <MsgId>MSG" + </MsgId>\n"
     content += "        <CreDtTm>{{ date_time 2010-02-15T07:30:00 }}</CreDtTm>\n"
     content += "        <NbOfTxs>{{ number_of_transactions 3 }}</NbOfTxs>\n"
     content += "        <CtrlSum>{{ total_amount 15850.00 }}</CtrlSum>\n"
