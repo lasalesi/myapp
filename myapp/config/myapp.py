@@ -42,23 +42,5 @@ def get_data():
                        "description": _("MyCalc")
                    }
             ]
-        }, 
-        {
-            "label": _("Banking"),
-            "icon": "fa fa-money",
-            "items": [
-                   {
-                       "type": "page",
-                       "name": "bankimport",
-                       "label": "Bank Import",
-                       "description": _("Bank import")
-                   },
-                                      {
-                       "type": "page",
-                       "name": "payment_export",
-                       "label": "Payment export",
-                       "description": _("Payment export")
-                   }
-            ]
-        } 
+        }
     ]
