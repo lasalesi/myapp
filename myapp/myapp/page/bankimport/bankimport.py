@@ -131,8 +131,8 @@ def parse_cs(content, account, auto_submit=False):
     try:
         for i in range(1, len(lines)):
             # skip line 0, it contains the column headers
-            # collect each fields (separated by semicolon)
-            fields = lines[i].split(';')
+            # collect each fields (separated by comma)
+            fields = lines[i].split(',')
            
             # get received amount, only continue if this has a value
             if len(fields) > 5:
