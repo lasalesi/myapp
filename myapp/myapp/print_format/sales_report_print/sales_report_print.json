@@ -1,0 +1,22 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-02-13 21:06:59.397590", 
+ "custom_format": 1, 
+ "disabled": 0, 
+ "doc_type": "Sales Report", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "html": "<!-- HEAD -->\n<div  id=\"header-html\" class=\"hidden-pdf\" >\n  <div class=\"print-heading\">\n    <h2>SEG<br><small>Sales Report {{ doc.get_formatted('date') }}</small></h2>\n  </div>\n</div>\n<meta name=\"pdfkit-orientation\" content=\"Landscape\"/>\n<div id=\"footer-html\" class=\"visible-pdf\">\n  <p class=\"text-left small page-number visible-pdf\">libracore business software</p>\n  <p class=\"text-center small page-number visible-pdf\"> Page <span class=\"page\"></span> of <span class=\"topage\"></span></p>\n  <p class=\"text-right small page-number visible-pdf\">https://www.libracore.com</p>\n</div>\n\n<!-- CONTENT -->\n<center><h3>Sales Report</h3></center>\n<table style=\"width: 100%;\">\n  <tr>\n    <th>Ende KW {{ doc.week }}</th>\n    <th colspan=2>Aktuelle Woche</th>\n    <th colspan=2>Kumuliert {{ doc.this_year }}</th>\n    <th colspan=2>Rolling demand/Woche {{ doc.this_year }}</th>\n    <th colspan=2>Rolling demand/Woche {{ doc.last_year }}</th>\n    <th colspan=2>Kumuliert {{ doc.last_year }}</th>\n  </tr>\t\n  <tr>\n    <th>Produkt</th>\n    <th>Kg verkauft</th>\n    <th>Umsatz CHF</th>\n    <th>Kg</th>\n    <th>Umsatz kum.</th>\n    <th>Kg</th>\n    <th>Umsatz</th>\n    <th>Kg</th>\n    <th>CHF</th>\n    <th>Kg</th>\n    <th>CHF</th> \n  </tr>\n  {% for n in doc.items %}\n  <tr>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n    <td>{{ n.description }}</td>\n  </tr>\n  {% endfor %} \n  <tr>\n    <th>Summe</th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th>\n    <th></th> \n  </tr>\n</table>\n<p>{{ doc.remarks or '' }}</p>", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-02-13 21:46:18.516296", 
+ "modified_by": "Administrator", 
+ "module": "MyApp", 
+ "name": "Sales Report Print", 
+ "owner": "Administrator", 
+ "print_format_builder": 1, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}

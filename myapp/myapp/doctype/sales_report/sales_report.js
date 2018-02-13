@@ -10,7 +10,7 @@ frappe.ui.form.on('Sales Report', {
             method: 'fill',
             doc: frm.doc,
             callback: function(response) {
-                refresh_field(['items', 'week', 'date']);
+                refresh_field(['items', 'week', 'date', 'this_year', 'last_year']);
             }
         }); 
     }
