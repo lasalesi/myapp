@@ -12,10 +12,10 @@ def get_data():
                     "name": "Person",
                     "description": _("List of persons")
                 },
-		{
-		    "type": "doctype",
-                    "name": "Log",
-                    "description": _("Log entries")
+                {
+                    "type": "doctype",
+                            "name": "Log",
+                            "description": _("Log entries")
                 }
             ]
         },
@@ -40,6 +40,18 @@ def get_data():
                        "name": "mycalc",
                        "label": "MyCalc",
                        "description": _("MyCalc")
+                   }
+            ]
+        },
+        {
+            "label": _("DocType Reports"),
+            "icon": "fa fa-wrench",
+            "items": [
+                   {
+                       "type": "doctype",
+                       "name": "Sales Report",
+                       "label": _("Sales Report"),
+                       "description": _("Sales Report")
                    }
             ]
         }
