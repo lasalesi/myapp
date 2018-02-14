@@ -25,6 +25,7 @@ class SalesReport(Document):
         # prepare global variables
         today = datetime.now()
         self.date = today.strftime("%Y-%m-%d")
+        self.title = "Sales Report " + str(self.date)
         self.week = today.strftime("%W")
         _week = int(today.strftime("%W"))
         _this_year = int(today.strftime("%Y"))
