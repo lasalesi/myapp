@@ -14,8 +14,13 @@ def get_data():
                 },
                 {
                     "type": "doctype",
-                            "name": "Log",
-                            "description": _("Log entries")
+                    "name": "Log",
+                    "description": _("Log entries")
+                },
+                {
+                    "type": "doctype",
+                    "name": "MyLabel",
+                    "description": _("Create labels")
                 }
             ]
         },
