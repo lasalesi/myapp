@@ -26,10 +26,16 @@ def create_pdf(label):
 	
 	with open(fname, "rb") as fileobj:
 		filedata = fileobj.read()
-		
+	
+	cleanup(fname)
+	
 	return filedata
 
-
+def cleanup(fname):
+	if os.path.exists(fname):
+		os.remove(fname)
+	return
+	
 @frappe.whitelist()
 def download_mylabel(name):
 	label = frappe.get_doc("MyLabel", name)
