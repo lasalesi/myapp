@@ -42,3 +42,7 @@ def download_mylabel(name):
 	frappe.local.response.filename = "{name}.pdf".format(name=name.replace(" ", "-").replace("/", "-"))
 	frappe.local.response.filecontent = create_pdf(label)
 	frappe.local.response.type = "download"
+
+def test_parameter(date):
+    print(date)
+    return
