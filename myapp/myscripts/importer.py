@@ -23,7 +23,7 @@ def get_bo_descriptions(path):
         customers = frappe.get_all("Customer", filters={'customer_name': customer_name}, fields=['name'])
         if customers:
             customer = frappe.get_doc("Customer", customers[0]['name'])
-            customer-description = description
+            customer.customer_details = description
             customer.save()
             frappe.db.commit()
         else:
