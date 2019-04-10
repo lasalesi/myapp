@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2019-04-10 20:15:41.115395",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2019-04-10 20:38:18.849744",
+ "modified_by": "Administrator",
+ "module": "MyApp",
+ "name": "dashboard",
+ "owner": "Administrator",
+ "page_name": "dashboard",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Dashboard"
+}
