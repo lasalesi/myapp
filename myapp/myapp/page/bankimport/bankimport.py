@@ -218,7 +218,7 @@ def get_bank_accounts():
     accounts = frappe.get_list('Account', filters={'account_type': 'Bank', 'is_group': 0}, fields=['name'])
     selectable_accounts = []
     for account in accounts:
-		selectable_accounts.append(account.name)    
+        selectable_accounts.append(account.name)    
     
     # frappe.throw(selectable_accounts)
     return {'accounts': selectable_accounts }
